@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Radar de Ofertas · Achadinhos da Shopee e do Mercado Livre</title>
+<meta name="description" content="Os mais vendidos da Shopee e do Mercado Livre, escolhidos a dedo: achadinhos baratos de casa, cozinha, ferramentas, moda, beleza e tecnologia com link direto pra comprar." />
+<meta name="robots" content="index, follow" />
+<meta property="og:title" content="Radar de Ofertas · Achadinhos Shopee e Mercado Livre" />
+<meta property="og:image" content="logo_radar.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
+    />
+    <link rel="icon" type="image/jpeg" href="logo_icon.jpg" />
+    <link rel="stylesheet" href="hark.css" />
+    <link rel="stylesheet" href="hark-hero.css" />
+    <style>
+      :root {
+        --x-dark: #1b2638;
+        --x-dark-2: #26344c;
+        --x-cream: #f1f3f6;
+        --x-ink: #1b2638;
+        --x-ink-2: #475569;
+        --x-line: #e2e8f0;
+        --x-tg: #1a7ab0;
+        --x-grad: linear-gradient(135deg, #f7b733 0%, #f26b2a 100%);
+        --x-grad-hover: linear-gradient(135deg, #f5a91a 0%, #e85d1c 100%);
+        --x-shadow: 0 1px 3px rgba(27, 38, 56, 0.06), 0 4px 14px rgba(27, 38, 56, 0.06);
+      }
+      html, body { background: var(--x-cream); color: var(--x-ink); }
+      body { font-family: var(--sans); margin: 0; }
+      .x-app { min-height: 100vh; background: var(--x-cream); color: var(--x-ink); padding-bottom: 96px; }
+      .x-wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 16px; box-sizing: border-box; }
+
+      /* top bar */
+      .x-bar { position: sticky; top: 0; z-index: 50; background: var(--x-dark); box-shadow: 0 2px 12px rgba(27, 38, 56, 0.25); }
+      .x-logo { gap: 10px; }
+      .x-logo img { height: 40px; width: 40px; object-fit: cover; border-radius: 8px; display: block; flex: 0 0 auto; }
+      .x-logo__accent { background: var(--x-grad); -webkit-background-clip: text; background-clip: text; color: #f7b733; -webkit-text-fill-color: transparent; }
+      .x-bar .x-wrap { display: flex; align-items: center; gap: 12px; padding-top: 10px; padding-bottom: 10px; flex-wrap: wrap; }
+      .x-logo { color: #fff; font: var(--type-heading); font-weight: var(--weight-bold); text-decoration: none; white-space: nowrap; letter-spacing: -0.01em; min-height: var(--tap); display: inline-flex; align-items: center; }
+      .x-main { overflow-x: clip; min-width: 0; width: 100%; }
+      html, body { overflow-x: hidden; max-width: 100%; }
+      .x-app, #ofertas, .x-filters { min-width: 0; max-width: 100%; }
+      .x-filters .x-chips { display: flex; flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; max-width: 100%; min-width: 0; white-space: nowrap; scrollbar-width: none; -ms-overflow-style: none; overscroll-behavior-x: contain; }
+      .x-filters .x-chips::-webkit-scrollbar { display: none; }
+      .x-filters { display: block !important; min-width: 0; max-width: 100%; }
+      .x-filters .x-chips { width: 100%; margin-bottom: 10px; }
+      #ofertas { min-width: 0; max-width: 100%; }
+      .x-search { flex: 1 1 220px; position: relative; }
+      .x-search input {
+        width: 100%; box-sizing: border-box; height: var(--tap); border: 0; border-radius: var(--r-pill);
+        padding: 0 16px 0 40px; font: var(--type-body); color: var(--x-ink); background: #fff; outline: none;
+      }
+      .x-search input:focus-visible { box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6); }
+      .x-search svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--x-ink-2); pointer-events: none; }
+
+      /* banner */
+      .x-banner {
+        position: relative; margin-top: 16px; border-radius: var(--r-l); overflow: hidden; min-height: 240px;
+        display: flex; align-items: flex-end; background: var(--x-dark); box-shadow: var(--x-shadow);
+      }
+      .x-banner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .x-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(27,38,56,0) 15%, rgba(27, 38, 56, 0.82) 100%); }
+      .x-banner__copy { position: relative; z-index: 1; padding: 24px; color: #fff; max-width: 560px; }
+      .x-banner__tag { display: inline-block; background: #fff; color: var(--x-dark); font: var(--type-tag); font-weight: var(--weight-bold); padding: 4px 10px; border-radius: var(--r-pill); margin: 0 0 10px; }
+      .x-banner h1 { font: var(--type-display); font-weight: var(--weight-bold); margin: 0 0 8px; letter-spacing: -0.02em; color: #fff; }
+      .x-banner p.x-sub { font: var(--type-body); margin: 0 0 16px; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.6); }
+      .x-banner__copy { background: linear-gradient(180deg, rgba(27,38,56,0) 0%, rgba(27,38,56,0.6) 40%); }
+      .x-cta {
+        display: inline-flex; align-items: center; justify-content: center; min-height: var(--tap); padding: 0 22px;
+        border-radius: var(--r-pill); background: var(--x-dark); color: #fff; font: var(--type-label); font-weight: var(--weight-bold);
+        text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.35); cursor: pointer; box-shadow: 0 4px 14px rgba(27, 38, 56, 0.35);
+      }
+      .x-cta:hover { background: var(--x-dark-2); }
+
+      /* top 3 */
+      .x-h2 { font: var(--type-heading); font-weight: var(--weight-bold); margin: 28px 0 12px; color: var(--x-ink); }
+      .x-top { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+      .x-top a {
+        display: flex; flex-direction: column; gap: 4px; padding: 14px 12px; border-radius: var(--r-m); text-decoration: none;
+        background-color: var(--x-dark); color: #fff; box-shadow: var(--x-shadow); min-height: var(--tap); min-width: 0; overflow-wrap: anywhere;
+      }
+      .x-top__rank { align-self: flex-start; background: var(--x-grad); color: #fff; font: var(--type-caption); font-weight: var(--weight-bold); padding: 2px 10px; border-radius: var(--r-pill); }
+      .x-top__name { font: var(--type-label); font-weight: var(--weight-bold); line-height: 1.25; }
+      .x-top__sold { font: var(--type-heading); font-weight: var(--weight-bold); letter-spacing: -0.02em; }
+      @media (min-width: 600px) { .x-top__sold { font: var(--type-figure); font-weight: var(--weight-bold); } }
+      .x-top__sold small { font: var(--type-caption); font-weight: var(--weight-medium); display: block; }
+
+      /* filters */
+      .x-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 28px 0 14px; }
+      .x-chips { display: flex; gap: 8px; overflow-x: auto; flex: 1 1 100%; min-width: 0; max-width: 100%; padding-bottom: 4px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+      .x-chips::-webkit-scrollbar { display: none; }
+      .x-chip {
+        flex: 0 0 auto; min-height: var(--tap); padding: 0 16px; border-radius: var(--r-pill); border: 1px solid var(--x-line);
+        background: #fff; color: var(--x-ink); font: var(--type-label); font-weight: var(--weight-medium); cursor: pointer; white-space: nowrap;
+      }
+      .x-chip[aria-pressed="true"] { background: var(--x-grad); border-color: transparent; color: #fff; font-weight: var(--weight-bold); }
+      .x-sortrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex: 1 1 100%; }
+      .x-count { font: var(--type-small); color: var(--x-ink-2); margin: 0; }
+      .x-sort { display: flex; align-items: center; gap: 8px; font: var(--type-small); color: var(--x-ink-2); }
+      .x-sort select {
+        min-height: 40px; border-radius: var(--r-s); border: 1px solid var(--x-line); background: #fff; color: var(--x-ink);
+        font: var(--type-label); padding: 0 10px;
+      }
+
+      /* grid */
+      .x-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      @media (min-width: 900px) {
+        .x-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+        .x-banner { min-height: 340px; }
+        .x-banner__copy { padding: 40px; }
+      }
+      .x-card { background: #fff; border-radius: var(--r-m); box-shadow: var(--x-shadow); overflow: hidden; display: flex; flex-direction: column; }
+      .x-card[hidden] { display: none; }
+      .x-card__media { position: relative; aspect-ratio: 1 / 1; background: #fff; margin: 0; border-bottom: 1px solid var(--x-line); }
+      .x-card__media img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 8px; box-sizing: border-box; }
+      .x-badge {
+        position: absolute; top: 8px; left: 8px; background: var(--x-grad); color: #fff; font: var(--type-caption);
+        font-weight: var(--weight-bold); padding: 3px 8px; border-radius: 6px;
+      }
+      .x-badge--top { background: var(--x-grad); color: #fff; box-shadow: 0 2px 6px rgba(242, 107, 42, 0.35); }
+      .x-mkt { align-self: flex-start; margin: 0 0 2px; padding: 2px 8px; border-radius: var(--r-pill); border: 1px solid var(--x-line); background: var(--x-cream); color: var(--x-ink-2); font: var(--type-caption); font-weight: var(--weight-medium); }
+      .x-mkts { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+      .x-chip small { font: var(--type-caption); opacity: 0.75; margin-left: 4px; }
+      .x-card__body { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+      .x-card__name {
+        font: var(--type-small); color: var(--x-ink); margin: 0; min-height: 2.6em;
+        display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      }
+      .x-price { font: var(--type-heading); font-weight: var(--weight-bold); color: var(--x-dark); margin: 2px 0 0; letter-spacing: -0.01em; }
+      .x-price small { font: var(--type-caption); font-weight: var(--weight-medium); margin-right: 2px; }
+      .x-detail { font: var(--type-caption); color: var(--x-ink-2); margin: 0; min-height: 1.4em; }
+      .x-buy {
+        margin-top: auto; display: flex; align-items: center; justify-content: center; min-height: var(--tap);
+        background: var(--x-grad); color: #fff; border-radius: var(--r-s); text-decoration: none;
+        font: var(--type-small); font-weight: var(--weight-bold); text-align: center; padding: 0 6px;
+      }
+      .x-buy:hover { background: var(--x-grad-hover); }
+      .x-empty { text-align: center; padding: 40px 16px; font: var(--type-body); color: var(--x-ink-2); background: #fff; border-radius: var(--r-m); }
+
+      /* footer band */
+      .x-foot { margin-top: 40px; background: var(--x-dark); color: #fff; border-radius: var(--r-l); padding: 28px 20px; text-align: center; }
+      .x-foot__logo { display: block; width: 120px; height: 120px; object-fit: cover; border-radius: var(--r-m); margin: 0 auto 16px; }
+      .x-foot h2 { font: var(--type-title); font-weight: var(--weight-bold); margin: 0 0 16px; color: #fff; }
+      .x-foot__btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+      .x-foot__btns a {
+        display: inline-flex; align-items: center; gap: 8px; min-height: var(--tap); padding: 0 20px; border-radius: var(--r-pill);
+        background: #fff; color: var(--x-ink); text-decoration: none; font: var(--type-label); font-weight: var(--weight-bold);
+      }
+      .x-foot__btns a.x-tg { background: var(--x-tg); color: #fff; }
+      .x-fine { font: var(--type-caption); color: var(--x-ink-2); text-align: center; margin: 16px 0 0; }
+
+      /* join buttons: Telegram + WhatsApp */
+      .x-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+      .x-join {
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: var(--tap); padding: 0 20px;
+        border-radius: var(--r-pill); color: #fff; text-decoration: none; font: var(--type-label); font-weight: var(--weight-bold);
+        box-shadow: 0 4px 14px rgba(27, 38, 56, 0.25); box-sizing: border-box;
+      }
+      .x-join svg { width: 18px; height: 18px; flex: 0 0 auto; }
+      .x-join.x-tg, .x-foot__btns a.x-tg { background: var(--x-tg); color: #fff; }
+      /* #25D366 fails contrast under white text; a darker WhatsApp green (5.4:1) carries the label, the brand green rings it */
+      .x-join.x-wa, .x-foot__btns a.x-wa { background: #0f7a3d; color: #fff; border: 2px solid #25D366; }
+      .x-join.x-wa:hover, .x-foot__btns a.x-wa:hover { background: #0b6632; }
+      @media (max-width: 480px) {
+        .x-btns, .x-foot__btns { flex-direction: column; align-items: stretch; }
+        .x-btns > a, .x-foot__btns > a { justify-content: center; width: 100%; box-sizing: border-box; text-align: center; }
+      }
+
+      /* floating buttons: WhatsApp on top, Telegram below */
+      .x-fabs {
+        position: fixed; right: 12px; bottom: 16px; z-index: 60; display: flex; flex-direction: column; gap: 10px;
+        transition: opacity var(--dur-quick) var(--ease-out), transform var(--dur-quick) var(--ease-out);
+      }
+      .x-fabs.is-away { opacity: 0; transform: translateX(72px); pointer-events: none; }
+      .x-fab {
+        width: 48px; height: 48px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 6px 18px rgba(27, 38, 56, 0.35); border: 1px solid rgba(255, 255, 255, 0.25);
+      }
+      .x-fab--tg { background: var(--x-tg); }
+      .x-fab--wa { background: #25D366; }
+      .x-fab svg { width: 24px; height: 24px; }
+      .x-app { padding-bottom: 140px; }
+      /* solid fallback under the orange gradient, for contrast */
+      .x-chip[aria-pressed="true"], .x-buy, .x-buy:hover, .x-badge, .x-badge--top, .x-top__rank { background-color: #c2410c; text-shadow: 0 1px 2px rgba(120, 45, 8, 0.45); }
+    </style>
+  </head>
+  <body>
+    <div class="page x-app" id="top">
+      <header class="x-bar">
+        <div class="x-wrap">
+          <a class="x-logo" href="#top"><img src="logo_icon.jpg" alt="" /><span>Radar <span class="x-logo__accent">Ofertas</span></span></a>
+          <label class="x-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="q" type="search" placeholder="Buscar achadinhos…" aria-label="Buscar produtos" autocomplete="off" />
+          </label>
+        </div>
+      </header>
+
+      <main class="x-wrap x-main">
+        <section class="x-banner" aria-label="Destaque">
+          <img src="radar_hero.jpg" alt="Radar de Ofertas: achadinhos da Shopee e do Mercado Livre" />
+          <div class="x-banner__copy">
+            <p class="x-banner__tag">🔥 Ofertas do dia</p>
+            <h1>Achadinhos que valem a pena</h1>
+            <p class="x-sub">Os mais vendidos da Shopee e do Mercado Livre, escolhidos a dedo.</p>
+            <div class="x-btns">
+              <a class="x-cta" href="#ofertas">Ver ofertas</a>
+              <a class="x-join x-tg" href="https://t.me/radarofertas_ofc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 3.3 2.9 10.5c-1.3.5-1.3 1.2-.2 1.6l4.8 1.5 1.8 5.6c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.8c.3-1.3-.5-1.9-1.4-1.5ZM8.4 13.3l9.4-5.9c.5-.3.9-.1.5.2l-8 7.3-.3 3.4-1.6-5Z"/></svg>Entrar no Telegram</a>
+              <a class="x-join x-wa" href="https://chat.whatsapp.com/KoJCIhcAyi30vmcMaZntzr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.91-2.2-.25-.59-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.42.25-.69.25-1.29.18-1.41-.08-.13-.28-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41Z"/></svg>Entrar no WhatsApp</a>
+            </div>
+          </div>
+        </section>
+
+        <h2 class="x-h2">🔥 Top 3 mais vendidos</h2>
+        <div class="x-top">
+          <a href="https://s.shopee.com.br/7KxpPdF4Uz" target="_blank" rel="noopener">
+            <span class="x-top__rank">#1</span>
+            <span class="x-top__sold">900 mil+<small>vendidos</small></span>
+            <span class="x-top__name">Capa de Colchão</span>
+          </a>
+          <a href="https://s.shopee.com.br/9pfD5Oglvs" target="_blank" rel="noopener">
+            <span class="x-top__rank">#2</span>
+            <span class="x-top__sold">70 mil+<small>vendidos</small></span>
+            <span class="x-top__name">Toalha Microfibra</span>
+          </a>
+          <a href="https://s.shopee.com.br/9zyYyl4pyI" target="_blank" rel="noopener">
+            <span class="x-top__rank">#3</span>
+            <span class="x-top__sold">60 mil+<small>vendidos</small></span>
+            <span class="x-top__name">Cozedor de Ovos</span>
+          </a>
+        </div>
+
+        <section id="ofertas" aria-label="Ofertas">
+          <div class="x-filters">
+            <div class="x-mkts" role="group" aria-label="Lojas">
+              <button class="x-chip" type="button" data-mkt="all" aria-pressed="true">Todas as lojas</button>
+              <button class="x-chip" type="button" data-mkt="shopee" aria-pressed="false">Shopee</button>
+              <button class="x-chip" type="button" data-mkt="ml" aria-pressed="false">Mercado Livre</button>
+            </div>
+            <div class="x-chips" role="group" aria-label="Categorias">
+              <button class="x-chip" type="button" data-cat="all" aria-pressed="true">Todos</button>
+              <button class="x-chip" type="button" data-cat="casa" aria-pressed="false">Casa e cozinha</button>
+              <button class="x-chip" type="button" data-cat="ferramentas" aria-pressed="false">Ferramentas e carro</button>
+              <button class="x-chip" type="button" data-cat="beleza" aria-pressed="false">Beleza e saúde</button>
+              <button class="x-chip" type="button" data-cat="tecnologia" aria-pressed="false">Tecnologia</button>
+              <button class="x-chip" type="button" data-cat="moda" aria-pressed="false">Moda</button>
+            </div>
+            <div class="x-sortrow">
+              <p class="x-count" id="count" aria-live="polite">24 produtos</p>
+              <label class="x-sort">Ordenar
+                <select id="sort">
+                  <option value="sold">Mais vendidos</option>
+                  <option value="asc">Menor preço</option>
+                  <option value="desc">Maior preço</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="x-grid" id="grid">
+            <article class="x-card" data-mkt="shopee" data-cat="casa" data-price="13.90" data-sold="900000">
+              <figure class="x-card__media"><img src="22992945609.jpg" alt="Capa de colchão impermeável matelada" loading="lazy" /><span class="x-badge x-badge--top">Mais vendido</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Capa de Colchão Impermeável Matelada</h3>
+                <p class="x-price"><small>R$</small>13,90</p>
+                <p class="x-detail">900 mil+ vendidos</p>
+                <a class="x-buy" href="https://s.shopee.com.br/7KxpPdF4Uz" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="beleza" data-price="11.88" data-sold="70000">
+              <figure class="x-card__media"><img src="12395259440.jpg" alt="Toalha de cabelo microfibra" loading="lazy" /><span class="x-badge">70 mil+ vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Toalha de Cabelo Microfibra</h3>
+                <p class="x-price"><small>R$</small>11,88</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://s.shopee.com.br/9pfD5Oglvs" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="casa" data-price="29.98" data-sold="60000">
+              <figure class="x-card__media"><img src="23199020709.jpg" alt="Cozedor de ovos elétrico" loading="lazy" /><span class="x-badge">60 mil+ vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Cozedor de Ovos Elétrico</h3>
+                <p class="x-price"><small>R$</small>29,98</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://s.shopee.com.br/9zyYyl4pyI" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="casa" data-price="44.99" data-sold="40000">
+              <figure class="x-card__media"><img src="19697980846.jpg" alt="Ventilador luminária LED" loading="lazy" /><span class="x-badge">40 mil+ vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Ventilador Luminária LED</h3>
+                <p class="x-price"><small>R$</small>44,99</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://s.shopee.com.br/2LZAWeYnjU" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="casa" data-price="18.89" data-sold="20000">
+              <figure class="x-card__media"><img src="18997974535.jpg" alt="Taças Diamond" loading="lazy" /><span class="x-badge">20 mil+ vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Taças Diamond</h3>
+                <p class="x-price"><small>R$</small>18,89</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://s.shopee.com.br/3g4WV25qBk" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="tecnologia" data-price="31.99" data-sold="20000">
+              <figure class="x-card__media"><img src="22498946021.jpg" alt="Power bank 10000mAh" loading="lazy" /><span class="x-badge">20 mil+ vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Power Bank 10000mAh</h3>
+                <p class="x-price"><small>R$</small>31,99</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://s.shopee.com.br/80DZ2Ft3qb" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="beleza" data-price="30.80" data-sold="20000">
+              <figure class="x-card__media"><img src="22797412872.jpg" alt="Balança de bioimpedância" loading="lazy" /><span class="x-badge">20 mil+ vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Balança de Bioimpedância</h3>
+                <p class="x-price"><small>R$</small>30,80</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://s.shopee.com.br/1BNCQANMlt" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="casa" data-price="119.90" data-sold="10000">
+              <figure class="x-card__media"><img src="22893267017.jpg" alt="Árvore de Natal" loading="lazy" /><span class="x-badge">10 mil+ vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Árvore de Natal</h3>
+                <p class="x-price"><small>R$</small>119,90</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://s.shopee.com.br/6VOiBk8O2a" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="casa" data-price="25.90" data-sold="8000">
+              <figure class="x-card__media"><img src="58260237454.jpg" alt="Alvejante Calisul" loading="lazy" /><span class="x-badge">8 mil+ vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Alvejante Calisul</h3>
+                <p class="x-price"><small>R$</small>25,90</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://s.shopee.com.br/70KzEaJnap" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="ferramentas" data-price="129.92" data-sold="5000">
+              <figure class="x-card__media"><img src="55260497129.jpg" alt="Kit estética automotiva Vonixx" loading="lazy" /><span class="x-badge">5 mil+ vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Kit Estética Automotiva Vonixx</h3>
+                <p class="x-price"><small>R$</small>129,92</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://s.shopee.com.br/4B0pNOcgxb" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="ferramentas" data-price="248.19" data-sold="4000">
+              <figure class="x-card__media"><img src="19498102659.jpg" alt="Parafusadeira WAP 12V com maleta" loading="lazy" /><span class="x-badge">4 mil+ vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Parafusadeira WAP 12V com Maleta</h3>
+                <p class="x-price"><small>R$</small>248,19</p>
+                <p class="x-detail">no Pix</p>
+                <a class="x-buy" href="https://s.shopee.com.br/7Kxp2oNdAJ" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="casa" data-price="61.74" data-sold="3000">
+              <figure class="x-card__media"><img src="23098745790.jpg" alt="Base com rodinhas para máquina e geladeira" loading="lazy" /><span class="x-badge">3 mil+ vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Base com Rodinhas p/ Máquina e Geladeira</h3>
+                <p class="x-price"><small>R$</small>61,74</p>
+                <p class="x-detail">com cupom</p>
+                <a class="x-buy" href="https://s.shopee.com.br/5VWArcD2Kj" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="ferramentas" data-price="89.99" data-sold="3000">
+              <figure class="x-card__media"><img src="58217601055.jpg" alt="Parafusadeira Nakasaki 25V" loading="lazy" /><span class="x-badge">3 mil+ vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Parafusadeira Nakasaki 25V</h3>
+                <p class="x-price"><small>R$</small>89,99</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://s.shopee.com.br/Lo4TPZn5l" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="casa" data-price="39.99" data-sold="2000">
+              <figure class="x-card__media"><img src="58218111805.jpg" alt="Chaleira elétrica Sagatini" loading="lazy" /><span class="x-badge">2 mil+ vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Chaleira Elétrica Sagatini</h3>
+                <p class="x-price"><small>R$</small>39,99</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://s.shopee.com.br/6fi8kXPCqH" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="beleza" data-price="9.50" data-sold="2000">
+              <figure class="x-card__media"><img src="48264636685.jpg" alt="Bola antiestresse" loading="lazy" /><span class="x-badge">2 mil+ vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Bola Antiestresse</h3>
+                <p class="x-price"><small>R$</small>9,50</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://s.shopee.com.br/5VWB8CbXms" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="ferramentas" data-price="17.55" data-sold="1000">
+              <figure class="x-card__media"><img src="23293819537.jpg" alt="Registro duplo 2 saídas" loading="lazy" /><span class="x-badge">1 mil+ vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Registro Duplo 2 Saídas</h3>
+                <p class="x-price"><small>R$</small>17,55</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://s.shopee.com.br/qkLJD49aL" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="ferramentas" data-price="20.90" data-sold="312">
+              <figure class="x-card__media"><img src="58205293572.jpg" alt="Alicate 28 em 1 MEDOOSI" loading="lazy" /><span class="x-badge">312 vendidos</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Alicate 28 em 1 MEDOOSI</h3>
+                <p class="x-price"><small>R$</small>20,90</p>
+                <p class="x-detail">⭐ 4,8</p>
+                <a class="x-buy" href="https://s.shopee.com.br/40hN7HFLop" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="tecnologia" data-price="84.55" data-sold="0">
+              <figure class="x-card__media"><img src="headphone.jpg" alt="Headphone Bluetooth BETTDOW" loading="lazy" /></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Headphone Bluetooth BETTDOW</h3>
+                <p class="x-price"><small>R$</small>84,55</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://s.shopee.com.br/5q8zzL3CYL" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="shopee" data-cat="casa" data-price="79.80" data-sold="0">
+              <figure class="x-card__media"><img src="garrafa.jpg" alt="Garrafa térmica" loading="lazy" /></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Shopee</p>
+                <h3 class="x-card__name">Garrafa Térmica</h3>
+                <p class="x-price"><small>R$</small>79,80</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://s.shopee.com.br/2VsY0AFbzN" target="_blank" rel="noopener">Comprar na Shopee</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="ml" data-cat="beleza" data-price="39.90" data-sold="0" data-off="38">
+              <figure class="x-card__media"><img src="https://http2.mlstatic.com/D_NQ_NP_662415-MLA97812910758_112025-O.webp" alt="Creatina Growth Supplements monohidratada 250g" loading="lazy" /><span class="x-badge">38% OFF</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Mercado Livre</p>
+                <h3 class="x-card__name">Creatina Growth Supplements Monohidratada em pó Sem sabor 250g</h3>
+                <p class="x-price"><small>R$</small>39,90</p>
+                <p class="x-detail"><s>De R$ 64,90</s></p>
+                <a class="x-buy" href="https://meli.la/2zVnG4G" target="_blank" rel="noopener">Comprar no Mercado Livre</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="ml" data-cat="moda" data-price="57.99" data-sold="0" data-off="42">
+              <figure class="x-card__media"><img src="https://http2.mlstatic.com/D_NQ_NP_799787-MLB85664619217_062025-O.webp" alt="Calça mom jeans feminina marmorizada" loading="lazy" /><span class="x-badge">42% OFF</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Mercado Livre</p>
+                <h3 class="x-card__name">Calça Mom Jeans Feminina Cintura Alta Marmorizada</h3>
+                <p class="x-price"><small>R$</small>57,99</p>
+                <p class="x-detail"></p>
+                <a class="x-buy" href="https://meli.la/2CKfjGU" target="_blank" rel="noopener">Comprar no Mercado Livre</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="ml" data-cat="tecnologia" data-price="98.40" data-sold="0" data-off="38">
+              <figure class="x-card__media"><img src="https://http2.mlstatic.com/D_NQ_NP_949687-MLA107423093255_022026-O.webp" alt="Câmera de segurança Wi-Fi Mercusys MC210" loading="lazy" /><span class="x-badge">38% OFF</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Mercado Livre</p>
+                <h3 class="x-card__name">Mercusys MC210 Câmera Segurança Wi-Fi 2K 3MP 360° (por TP-Link)</h3>
+                <p class="x-price"><small>R$</small>98,40</p>
+                <p class="x-detail"><s>De R$ 159,90</s></p>
+                <a class="x-buy" href="https://meli.la/1SCU6yJ" target="_blank" rel="noopener">Comprar no Mercado Livre</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="ml" data-cat="beleza" data-price="169.38" data-sold="0" data-off="48">
+              <figure class="x-card__media"><img src="https://http2.mlstatic.com/D_NQ_NP_926952-MLU75954118474_052024-O.webp" alt="Perfume Banderas The Golden Secret 200 ml" loading="lazy" /><span class="x-badge">48% OFF</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Mercado Livre</p>
+                <h3 class="x-card__name">Perfume Banderas The Golden Secret Eau de Toilette 200 ml</h3>
+                <p class="x-price"><small>R$</small>169,38</p>
+                <p class="x-detail"><s>De R$ 329,00</s></p>
+                <a class="x-buy" href="https://meli.la/2u1iyf5" target="_blank" rel="noopener">Comprar no Mercado Livre</a>
+              </div>
+            </article>
+            <article class="x-card" data-mkt="ml" data-cat="moda" data-price="62.35" data-sold="0" data-off="52">
+              <figure class="x-card__media"><img src="https://http2.mlstatic.com/D_NQ_NP_600644-MLB117383061417_092026-O.webp" alt="Tênis Zanz preto para musculação e caminhada" loading="lazy" /><span class="x-badge">52% OFF</span></figure>
+              <div class="x-card__body">
+                <p class="x-mkt">Mercado Livre</p>
+                <h3 class="x-card__name">Tênis Zanz Masculino e Feminino, Musculação, Leve, Caminhada, Preto</h3>
+                <p class="x-price"><small>R$</small>62,35</p>
+                <p class="x-detail"><s>De R$ 129,90</s></p>
+                <a class="x-buy" href="https://meli.la/25UeCam" target="_blank" rel="noopener">Comprar no Mercado Livre</a>
+              </div>
+            </article>
+          </div>
+          <p class="x-empty" id="empty" hidden>Nenhum achadinho encontrado. Tente outra busca.</p>
+        </section>
+
+        <section class="x-foot" aria-label="Redes sociais">
+          <img class="x-foot__logo" src="logo_radar.jpg" alt="Radar Ofertas" />
+          <h2>Receba os achadinhos primeiro</h2>
+          <div class="x-foot__btns">
+            <a class="x-tg" href="https://t.me/radarofertas_ofc" target="_blank" rel="noopener">✈️ Entrar no Telegram</a>
+            <a class="x-wa" href="https://chat.whatsapp.com/KoJCIhcAyi30vmcMaZntzr" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.030-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.91-2.2-.25-.59-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.210 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.42.25-.69.25-1.29.18-1.41-.08-.13-.28-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.890c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.890-11.89a11.82 11.82 0 0 0-3.48-8.41Z"/></svg>Entrar no WhatsApp</a>
+            <a href="https://www.instagram.com/radaroferta_ofc/" target="_blank" rel="noopener">📸 Instagram @radaroferta_ofc</a>
+          </div>
+        </section>
+        <p class="x-fine">Preços e estoque podem mudar. Confira o valor final na loja. Atualizado em 19/10/2026.</p>
+      </main>
+
+      <div class="x-fabs" id="fabs">
+      <a class="x-fab x-fab--wa" href="https://chat.whatsapp.com/KoJCIhcAyi30vmcMaZntzr" target="_blank" rel="noopener" aria-label="Entrar no grupo do WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.91-2.2-.25-.59-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.42.25-.69.25-1.29.18-1.41-.08-.13-.28-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.450 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41Z"/></svg>
+      </a>
+      <a class="x-fab x-fab--tg" href="https://t.me/radarofertas_ofc" target="_blank" rel="noopener" aria-label="Entrar no canal do Telegram">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 3.3 2.9 10.5c-1.3.5-1.3 1.2-.2 1.6l4.8 1.5 1.8 5.6c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.8c.3-1.3-.5-1.9-1.4-1.5ZM8.4 13.3l9.4-5.9c.5-.3.9-.1.5.2l-8 7.3-.3 3.4-1.6-5Z"/></svg>
+      </a>
+      </div>
+    </div>
+    <script src="hark.js"></script>
+    <script>
+      /* slide the floating buttons aside while they would cover a buy button */
+      (function () {
+        var fabs = document.getElementById("fabs");
+        var buys = document.getElementsByClassName("x-buy");
+        var ticking = false;
+        function check() {
+          ticking = false;
+          /* offset* ignore the slide transform, so this is the resting spot */
+          var cs = getComputedStyle(fabs), de = document.documentElement;
+          var right = de.clientWidth - parseFloat(cs.right), bottom = de.clientHeight - parseFloat(cs.bottom);
+          var f = { left: right - fabs.offsetWidth, top: bottom - fabs.offsetHeight, right: right, bottom: bottom };
+          var hit = false;
+          for (var i = 0; i < buys.length && !hit; i++) {
+            var b = buys[i].getBoundingClientRect();
+            if (!b.width) continue;
+            hit = b.right > f.left - 4 && b.left < f.right && b.bottom > f.top - 4 && b.top < f.bottom + 4;
+          }
+          fabs.classList.toggle("is-away", hit);
+        }
+        function req() { if (!ticking) { ticking = true; requestAnimationFrame(check); } }
+        window.addEventListener("scroll", req, { passive: true });
+        window.addEventListener("resize", req);
+        document.addEventListener("input", req);
+        document.addEventListener("click", function () { setTimeout(req, 50); });
+        check();
+      })();
+    </script>
+    <script>
+      (function () {
+        var grid = document.getElementById("grid");
+        var cards = Array.prototype.slice.call(grid.querySelectorAll(".x-card"));
+        var q = document.getElementById("q");
+        var sort = document.getElementById("sort");
+        var chips = document.querySelectorAll(".x-chip[data-cat]");
+        var mchips = document.querySelectorAll(".x-chip[data-mkt]");
+        var count = document.getElementById("count");
+        var empty = document.getElementById("empty");
+        var cat = "all", mkt = "all";
+        var MKT = { shopee: { name: "Shopee", buy: "Comprar na Shopee" }, ml: { name: "Mercado Livre", buy: "Comprar no Mercado Livre" } };
+        cards.forEach(function (c, i) {
+          c.dataset.order = i;
+          var m = MKT[c.dataset.mkt] || MKT.shopee;
+          c.querySelector(".x-mkt").textContent = m.name;
+          c.querySelector(".x-buy").textContent = m.buy;
+        });
+        var hasML = cards.some(function (c) { return c.dataset.mkt === "ml"; });
+        if (!hasML) {
+          var mlChip = document.querySelector('.x-chip[data-mkt="ml"]');
+          var s = document.createElement("small");
+          s.textContent = "em breve";
+          mlChip.appendChild(s);
+        }
+        function norm(s) { return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
+        function apply() {
+          var term = norm(q.value.trim());
+          var mode = sort.value;
+          var sorted = cards.slice().sort(function (a, b) {
+            var pa = +a.dataset.price, pb = +b.dataset.price;
+            if (mode === "asc") return pa - pb;
+            if (mode === "desc") return pb - pa;
+            /* no sold count (ML): rank by discount after the counted sellers */
+            return (+b.dataset.sold - +a.dataset.sold) || ((+b.dataset.off || 0) - (+a.dataset.off || 0)) || (+a.dataset.order - +b.dataset.order);
+          });
+          var shown = 0;
+          sorted.forEach(function (c) {
+            var name = norm(c.querySelector(".x-card__name").textContent);
+            var ok = (cat === "all" || c.dataset.cat === cat) && (mkt === "all" || c.dataset.mkt === mkt) && (!term || name.indexOf(term) !== -1);
+            c.hidden = !ok;
+            if (ok) shown++;
+            grid.appendChild(c);
+          });
+          count.textContent = shown + (shown === 1 ? " produto" : " produtos");
+          empty.hidden = shown !== 0;
+          empty.textContent = (mkt === "ml" && !hasML) ? "Em breve ofertas do Mercado Livre." : "Nenhum achadinho encontrado. Tente outra busca.";
+        }
+        mchips.forEach(function (b) {
+          b.addEventListener("click", function () {
+            mkt = b.dataset.mkt;
+            mchips.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+            apply();
+          });
+        });
+        chips.forEach(function (b) {
+          b.addEventListener("click", function () {
+            cat = b.dataset.cat;
+            chips.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+            apply();
+          });
+        });
+        q.addEventListener("input", function () {
+          apply();
+        });
+        q.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") document.getElementById("ofertas").scrollIntoView({ behavior: "smooth" });
+        });
+        sort.addEventListener("change", apply);
+        apply();
+      })();
+    </script>
+  </body>
+</html>
